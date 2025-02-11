@@ -148,6 +148,11 @@
     Curriculum
     <div class="dropdown-menu" id="curriculumDropdown"></div>
   </div>
+  
+  <div class="tab">
+    Pedagogy
+    <div class="dropdown-menu" id="pedagogyDropdown"></div>
+  </div>
 
   <div class="tab">
     Training
@@ -224,6 +229,31 @@
         { id: "cur_policy_equality_program", label: "Unified Curricula", breadcrumb: "Equality > Curriculum > Policy > Unified Curricula" }
       ]
     };
+    const pedagogyOptions = {
+      efdi_all: [
+        { id: "pedagogy_all", label: "Area", breadcrumb: "Overall > Pedagogy" },
+        { id: "pedagogy_policy_all", label: "Policy", breadcrumb: "Overall > Pedagogy > Policy" },
+        { id: "pedagogy_policy_all_guide", label: "Guidelines", breadcrumb: "Overall > Pedagogy > Policy > Guidelines" },
+        { id: "pedagogy_policy_all_object", label: "Objectives", breadcrumb: "Overall > Pedagogy > Policy > Objectives" }
+      ],
+      efdi_non_system: [
+        { id: "pedagogy_non", label: "Area", breadcrumb: "Non-system > Pedagogy" },
+        { id: "pedagogy_policy_non", label: "Policy", breadcrumb: "Non-system > Pedagogy > Policy" },
+        { id: "pedagogy_policy_non_guide", label: "Guidelines", breadcrumb: "Non-system > Pedagogy > Policy > Guidelines" },
+        { id: "pedagogy_policy_non_object", label: "Objectives", breadcrumb: "Non-system > Pedagogy > Policy > Objectives" }
+      ],
+      efdi_policy: [
+        { id: "pedagogy_policy_policy", label: "Area", breadcrumb: "Policy > Pedagogy" },
+        { id: "pedagogy_policy_guide", label: "In-service", breadcrumb: "Policy > Pedagogy > Guidelines" },
+        { id: "pedagogy_policy_object", label: "Mandatory", breadcrumb: "Policy > Pedagogy > Objectives" }
+      ],
+      efdi_levels: [
+        { id: "pedagogy_levels", label: "Area", breadcrumb: "Levels > Pedagogy" },
+        { id: "pedagogy_policy_levels", label: "Policy", breadcrumb: "Levels > Pedagogy > Policy" },
+        { id: "pedagogy_policy_levels_guide", label: "Guidelines", breadcrumb: "Levels > Pedagogy > Policy > Guidelines" },
+        { id: "pedagogy_policy_levels_object", label: "Objectives", breadcrumb: "Levels > Pedagogy > Policy > Objectives" }
+      ]
+    };
     
     const trainingOptions = {
       efdi_all: [
@@ -272,6 +302,27 @@
       });
     }
 
+    function updatePedagogyDropdown() {
+      const dropdown = document.getElementById("pedagogyDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
+
+      pedagogyOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
+
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
+    }
+
     function updateYear(index) {
       currentYear = years[index];
       document.getElementById("selectedYear").textContent = currentYear;
@@ -282,7 +333,8 @@
       topLevelSelection = selection;
       switchTab(selection, newBreadcrumbPath);
       updateCurriculumDropdown();
-      updateTrainingDropdown(); // Add this line
+      updateTrainingDropdown()
+      updatePedagogyDropdown(); // Add this line
     }
 
     function updateCurriculumDropdown() {
@@ -392,6 +444,7 @@
     // Initialize the dropdowns with the default selection
     updateCurriculumDropdown();
     updateTrainingDropdown();
+    updatePedagogyDropdown();
   </script>
 </body>
 </html>
