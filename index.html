@@ -148,13 +148,6 @@
       Curriculum
       <div class="dropdown-menu" id="curriculumDropdown"></div>
     </div>
-    
-    <div class="tab">
-      Training
-      <div class="dropdown-menu">
-        <div class="dropdown-item" onclick="switchTab('training_policy', 'EfDI > Training > Policy')">Policy</div>
-      </div>
-    </div>
   </div>
 
   <div class="year-slider">
@@ -311,8 +304,7 @@
           cur_practice_all_out_act: `${baseURL}comp_cur_prac_act_${currentYear}/`,
           cur_practice_non_out_act: `${baseURL}comp_cur_prac_act_${currentYear}/`,
           cur_practice_practice_out_act: `${baseURL}comp_cur_prac_act_${currentYear}/`,
-          cur_practice_levels_out_act: `${baseURL}comp_cur_prac_act_${currentYear}/`,
-          training_policy: `${baseURL}training_policy_${currentYear}/`
+          cur_practice_levels_out_act: `${baseURL}comp_cur_prac_act_${currentYear}/`
         };
 
         mapFrame.src = mapURLs[mapID] || mapURLs['efdi_all'];
