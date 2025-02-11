@@ -331,12 +331,9 @@
   </script>
   
   <script>
-    let currentYear = "2022";
-    let breadcrumbPath = "EfDI > Overall"; // Default breadcrumb
-    let currentTab = "efdi_all"; // Default tab
-    let topLevelSelection = "efdi_all"; // Track top-level selection
-    const baseURL = "https://adrianaarellano.github.io/";
-    const years = ["2009", "2016", "2022"];
+    function populateTrainingDropdown() {
+    const trainingDropdown = document.getElementById("trainingDropdown");
+    trainingDropdown.innerHTML = ""; // Clear existing items
 
     const trainingOptions = {
       efdi_all: [
@@ -380,9 +377,12 @@
       const dropdown = document.getElementById("trainingDropdown");
       dropdown.innerHTML = ""; // Clear existing items
       
-      trainingOptions[topLevelSelection].forEach(option => {
+      trainingOptions.forEach(option => {
         const item = document.createElement("div");
         item.className = "dropdown-item";
+        item.textContent = option.label;
+        trainingDropdown.appendChild(item);
+      });
 
     // Assign indentation classes
         if (option.label === "Policy" || option.label === "Practice") {
@@ -440,7 +440,7 @@
     }
 
     // Initialize the Training dropdown with the default selection
-    updateTrainingDropdown();
+    populateTrainingDropdown();
   </script>
 </body>
 </html>
