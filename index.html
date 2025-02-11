@@ -165,14 +165,14 @@
     <span id="breadcrumb-path"><a href="#" onclick="resetBreadcrumb()">EfDI</a> > Overall</span>
   </div>
 
-  <iframe id="mapFrame" src="https://adrianaarellano.github.io/comp_all_index_2022/"></iframe>
+  <iframe id="mapFrame" src="https://adrianarellano.github.io/comp_all_index_2022/"></iframe>
 
   <script>
     let currentYear = "2022";
     let breadcrumbPath = "EfDI > Overall"; // Default breadcrumb
     let currentTab = "efdi_all"; // Default tab
     let topLevelSelection = "efdi_all"; // Track top-level selection
-    const baseURL = "https://adrianaarellano.github.io/";
+    const baseURL = "https://adrianarellano.github.io/";
     const years = ["2009", "2016", "2022"];
 
     const curriculumOptions = {
@@ -229,47 +229,48 @@
       efdi_all: [
         { id: "train_all", label: "Area", breadcrumb: "Overall > Training" },
         { id: "train_policy_all", label: "Policy", breadcrumb: "Overall > Training > Policy" },
-        { id: "train_policy_all_service", label: "In-service", breadcrumb: "Overall > Training > Policy > In-service" },
+        { id: "train_policy_all_in_service", label: "In-service", breadcrumb: "Overall > Training > Policy > In-service" },
         { id: "train_policy_all_mandatory", label: "Mandatory", breadcrumb: "Overall > Training > Policy > Mandatory" }
       ],
       efdi_non_system: [
         { id: "train_non", label: "Area", breadcrumb: "Non-system > Training" },
         { id: "train_policy_non", label: "Policy", breadcrumb: "Non-system > Training > Policy" },
-        { id: "train_policy_non_service", label: "In-service", breadcrumb: "Non-system > Training > Policy > In-service" },
+        { id: "train_policy_non_in_service", label: "In-service", breadcrumb: "Non-system > Training > Policy > In-service" },
         { id: "train_policy_non_mandatory", label: "Mandatory", breadcrumb: "Non-system > Training > Policy > Mandatory" }
       ],
       efdi_policy: [
         { id: "train_policy_policy", label: "Area", breadcrumb: "Policy > Training" },
-        { id: "train_policy_service", label: "In-service", breadcrumb: "Policy > Training > In-service" },
+        { id: "train_policy_in_service", label: "In-service", breadcrumb: "Policy > Training > In-service" },
         { id: "train_policy_mandatory", label: "Mandatory", breadcrumb: "Policy > Training > Mandatory" }
       ],
       efdi_levels: [
         { id: "train_levels", label: "Area", breadcrumb: "Levels > Training" },
         { id: "train_policy_levels", label: "Policy", breadcrumb: "Levels > Training > Policy" },
-        { id: "train_policy_levels_service", label: "In-service", breadcrumb: "Levels > Training > Policy > In-service" },
-        { id: "train_policy_levels_mandatory", label: "Topic", breadcrumb: "Levels > Training > Policy > Mandatory" }
+        { id: "train_policy_levels_in_service", label: "In-service", breadcrumb: "Levels > Training > Policy > In-service" },
+        { id: "train_policy_levels_mandatory", label: "Mandatory", breadcrumb: "Levels > Training > Policy > Mandatory" }
       ]
-};
+    };
 
-function updateTrainingDropdown() {
-  const dropdown = document.getElementById("trainingDropdown");
-  dropdown.innerHTML = ""; // Clear existing items
+    function updateTrainingDropdown() {
+      const dropdown = document.getElementById("trainingDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
 
-  trainingOptions[topLevelSelection].forEach(option => {
-    const item = document.createElement("div");
-    item.className = "dropdown-item";
+      trainingOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
 
-    // Assign indentation classes
-    if (option.label === "Policy" || option.label === "Practice") {
-      item.classList.add("indent-1");
-    } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
-      item.classList.add("indent-2");
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
     }
-
-    item.textContent = option.label;
-    item.onclick = () => switchTab(option.id, option.breadcrumb);
-    dropdown.appendChild(item);
-  });
 
     function updateYear(index) {
       currentYear = years[index];
@@ -281,6 +282,7 @@ function updateTrainingDropdown() {
       topLevelSelection = selection;
       switchTab(selection, newBreadcrumbPath);
       updateCurriculumDropdown();
+      updateTrainingDropdown(); // Add this line
     }
 
     function updateCurriculumDropdown() {
@@ -291,7 +293,7 @@ function updateTrainingDropdown() {
         const item = document.createElement("div");
         item.className = "dropdown-item";
 
-    // Assign indentation classes
+        // Assign indentation classes
         if (option.label === "Policy" || option.label === "Practice") {
           item.classList.add("indent-1");
         } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
@@ -393,3 +395,4 @@ function updateTrainingDropdown() {
   </script>
 </body>
 </html>
+                                      
