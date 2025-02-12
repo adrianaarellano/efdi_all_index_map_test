@@ -336,7 +336,7 @@
       });
     }
 
-    function updatePedagogyDropdown() {
+   function updatePedagogyDropdown() {
       const dropdown = document.getElementById("pedagogyDropdown");
       dropdown.innerHTML = ""; // Clear existing items
 
@@ -367,7 +367,7 @@
       topLevelSelection = selection;
       switchTab(selection, newBreadcrumbPath);
       updateCurriculumDropdown();
-      updateTrainingDropdown()
+      updateTrainingDropdown();
       updatePedagogyDropdown(); // Add this line
     }
 
@@ -461,7 +461,7 @@
           train_policy_levels_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
           pedagogy_all: `${baseURL}comp_subin_ped_${currentYear}/`,
           pedagogy_non: `${baseURL}comp_subin_ped_${currentYear}/`,
-          pedagogy_levels: `${baseURL}comp_subin_ped_$${currentYear}/`,
+          pedagogy_levels: `${baseURL}comp_subin_ped_${currentYear}/`, // Fixed typo
           pedagogy_equality: `${baseURL}comp_subin_eq_ped_${currentYear}/`,
           pedagogy_policy_policy: `${baseURL}comp_ped_pol_${currentYear}/`,
           pedagogy_practice_practice: `${baseURL}comp_ped_prac_${currentYear}/`,
